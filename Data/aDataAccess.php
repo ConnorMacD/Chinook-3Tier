@@ -1,7 +1,6 @@
 <?php
 
-// So, which database implementation will we use??
-//require_once '../Data/DataAccessMySQLi.php';
+//Comment whichever one isn't being used.
 //require_once '../Data/DataAccessPDOMySQL.php';
 //require_once '../Data/DataAccessPDOSQLite.php';
 
@@ -14,7 +13,6 @@ abstract class aDataAccess
         // singleton
         if(self::$m_DataAccess == null)
         {
-            //self::$m_DataAccess = new DataAccessMySQLi();
             //self::$m_DataAccess = new DataAccessPDOMySQL();
             //self::$m_DataAccess = new DataAccessPDOSQLite();
         }
@@ -32,8 +30,4 @@ abstract class aDataAccess
     public abstract function fetchSongID($row);
 
     public abstract function fetchSongName($row);
-
-    public abstract function fetchCustomerLastName($row);
-
-    public abstract function insertCustomer($firstName,$lastName);
 }
