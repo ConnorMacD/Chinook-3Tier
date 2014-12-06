@@ -1,7 +1,7 @@
 <?php
 
 //Comment whichever one isn't being used.
-//require_once '../Data/DataAccessPDOMySQL.php';
+require_once '../Data/DataAccessPDOMySQL.php';
 //require_once '../Data/DataAccessPDOSQLite.php';
 
 abstract class aDataAccess
@@ -13,7 +13,7 @@ abstract class aDataAccess
         // singleton
         if(self::$m_DataAccess == null)
         {
-            //self::$m_DataAccess = new DataAccessPDOMySQL();
+            self::$m_DataAccess = new DataAccessPDOMySQL();
             //self::$m_DataAccess = new DataAccessPDOSQLite();
         }
         return self::$m_DataAccess;
