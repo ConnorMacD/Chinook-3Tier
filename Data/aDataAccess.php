@@ -29,24 +29,24 @@ abstract class aDataAccess
 
 
     // Fetch individual columns
-    public abstract function fetchSongID($row);
+    public abstract function fetchTrackID($row);
 
-    public abstract function fetchSongName($row);
+    public abstract function fetchTrackName($row);
 
-    public abstract function fetchSongAlbum($row);
+    public abstract function fetchTrackAlbum($row);
 
-    public abstract function fetchSongArtist($row);
+    public abstract function fetchTrackArtist($row);
 
-    public abstract function fetchSongMediaType($row);
+    public abstract function fetchTrackMediaType($row);
 
-    public abstract function fetchSongGenre($row);
+    public abstract function fetchTrackGenre($row);
 
-    public abstract function fetchSongComposers($row);
+    public abstract function fetchTrackComposer($row);
 
-    public abstract function fetchSongMilliseconds($row);
+    public abstract function fetchTrackLength($row);
 
-    public abstract function fetchSongBytes($row);
+    public abstract function fetchTrackSize($row);
 
-    public abstract function fetchSongUnitPrice($row);
+    public abstract function fetchTrackPrice($row);
 
 }
