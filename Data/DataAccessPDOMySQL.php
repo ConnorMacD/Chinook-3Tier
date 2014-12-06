@@ -37,15 +37,9 @@ class DataAccessPDOMySQL extends aDataAccess
     {
         try {
 
-            $this->stmt = $this->dbConnection->prepare('SELECT track.TrackId, track.Name, album.Title AS trackAlbum,
-                                                        artist.Name as trackArtist, mediatype.Name as mediaType,
-                                                        genre.Name as genreName, track.Composer, track.Milliseconds,
-                                                        track.Bytes, track.UnitPrice
-                                                        FROM track JOIN album JOIN mediatype JOIN artist JOIN genre
-                                                        WHERE track.MediaTypeId = mediatype.MediaTypeId AND
-                                                        track.genreId = genre.GenreId AND track.AlbumId = album.AlbumId AND
-                                                        album.ArtistId = artist.ArtistId
-                                                        ORDER BY `track`.`TrackId` ASC LIMIT :start, :count');
+
+            $this->stmt = $this->dbConnection->prepare('SELECT track.TrackId, track.Name, album.Title AS trackAlbum,artist.Name as trackArtist, mediatype.Name as mediaType,genre.Name as genreName, track.Composer, track.Milliseconds,track.Bytes, track.UnitPrice FROM track
+                JOIN album JOIN mediatype JOIN artist JOIN genre WHERE track.MediaTypeId = mediatype.MediaTypeId AND track.genreId = genre.GenreId AND track.AlbumId = album.AlbumId AND album.ArtistId = artist.ArtistId ORDER BY track.TrackId ASC LIMIT :start, :count');
             $this->stmt->bindParam(':start', $start, PDO::PARAM_INT);
             $this->stmt->bindParam(':count', $count, PDO::PARAM_INT);
 
@@ -108,12 +102,12 @@ class DataAccessPDOMySQL extends aDataAccess
 
     public function fetchTrackSize($row)
     {
-        return $row['last_name'];
+        return $row['Bytes'];
     }
 
     public function fetchTrackPrice($row)
     {
-        return $row['last_name'];
+        return $row['UnitPrice'];
     }
 
 //    public function insertCustomer($firstName,$lastName)

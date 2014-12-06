@@ -35,6 +35,27 @@
 
             <tbody>
 
+            <?php
+                require("../Business/Track.php");
+                $arrayOfTracks = Track::retrieveSome(0,10);
+            
+                foreach($arrayOfTracks as $track):
+            ?>
+            <tr>
+                <td><?php echo $track->getID(); ?></td>
+                <td><?php echo $track->getName(); ?></td>
+                <td><?php echo $track->getAlbum(); ?></td>
+                <td><?php echo $track->getArtist(); ?></td>
+                <td><?php echo $track->getMediaType(); ?></td>
+                <td><?php echo $track->getGenre(); ?></td>
+                <td><?php echo $track->getComposers(); ?></td>
+                <td><?php echo $track->getMilliseconds(); ?></td>
+                <td><?php echo $track->getBytes(); ?></td>
+                <td><?php echo $track->getUnitPrice(); ?></td>
+                <td><a href="cart.php?add=<?php echo $track->getID(); ?>">Add to Cart</a></td>
+            </tr>
+            <?php endforeach; ?>
+            
             </tbody>
         </table>
     </body>

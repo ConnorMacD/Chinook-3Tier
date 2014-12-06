@@ -12,6 +12,8 @@ require_once '../Data/aDataAccess.php';
 class Track implements iBusinessObject {
     private $m_trackId;
     private $m_name;
+
+
     private $m_album;
     private $m_artist;
     private $m_mediaType;
@@ -38,7 +40,9 @@ class Track implements iBusinessObject {
         return ($this->m_trackId);
     }
 
-
+    public function getName() {
+        return $this->m_name;
+    }
 
     public function getAlbum() {
         return ($this->m_album);
@@ -64,7 +68,6 @@ class Track implements iBusinessObject {
         return ($this->m_milliseconds);
     }
 
-
     public function getBytes() {
         return ($this->m_bytes);
     }
@@ -79,7 +82,6 @@ class Track implements iBusinessObject {
         $myDataAccess->connectToDB();
 
         $myDataAccess->selectTracks($start,$count);
-
 
         //fix this
         while($row = $myDataAccess->fetchTracks())
@@ -112,4 +114,5 @@ class Track implements iBusinessObject {
 //        return "$recordsAffected row(s) affected!";
 
     }
+
 }
