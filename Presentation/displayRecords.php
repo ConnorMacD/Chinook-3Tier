@@ -36,8 +36,11 @@
             <tbody>
 
             <?php
+            
+                (isset($_GET['num']) ? $limit = (int)$_GET['num'] : $limit = 0);
+            
                 require("../Business/Track.php");
-                $arrayOfTracks = Track::retrieveSome(0,10);
+                $arrayOfTracks = Track::retrieveSome($limit,10);
             
                 foreach($arrayOfTracks as $track):
             ?>
@@ -54,8 +57,13 @@
                 <td><?php echo $track->getUnitPrice(); ?></td>
                 <td><a href="cart.php?add=<?php echo $track->getID(); ?>">Add to Cart</a></td>
             </tr>
-            <?php endforeach; ?>
-            
+            <?php endforeach;?>
+                <tr>
+                    <td colspan="11">
+                        <a href="displayRecords.php?num=<?php echo ($limit != 0 ? $limit - 10 : $limit)?>" class="left">Previous 10 Songs</a>
+                        <a href="displayRecords.php?num=<?php echo ($limit + 10); ?>" class="right">Next 10 Songs</a>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </body>
