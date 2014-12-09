@@ -100,6 +100,31 @@ class Track implements iBusinessObject {
 
         return $arrayOfTrackObjects;
     }
+    public static function retrieveAll()
+    {
+        $myDataAccess = aDataAccess::getInstance();
+        $myDataAccess->connectToDB();
+
+        $myDataAccess->selectAllTracks();
+
+        //fix this
+        while($row = $myDataAccess->fetchTracks())
+        {
+            $currentTrack = new self($myDataAccess->fetchTrackName($row), $myDataAccess->fetchTrackMediaType($row),
+                $myDataAccess->fetchTrackComposer($row), $myDataAccess->fetchTrackLength($row),
+                $myDataAccess->fetchTrackSize($row), $myDataAccess->fetchTrackPrice($row),
+                $myDataAccess->fetchTrackAlbum($row), $myDataAccess->fetchTrackArtist($row),
+                $myDataAccess->fetchTrackGenre($row));
+
+            $currentTrack->m_trackId = $myDataAccess->fetchTrackID($row);
+            $arrayOfTrackObjects[] = $currentTrack;
+        }
+
+        $myDataAccess->closeDB();
+
+        return $arrayOfTrackObjects;
+    }
+
 
     public function save()
     {

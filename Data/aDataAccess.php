@@ -27,6 +27,8 @@ abstract class aDataAccess
 
     public abstract function fetchTracks();
 
+    public abstract function selectAllTracks();
+
 
     // Fetch individual columns
     public abstract function fetchTrackID($row);
