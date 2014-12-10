@@ -11,8 +11,10 @@
         <section>
             <table id="grid">
                 <thead>
-                    <tr colspan="3">
-                        Available Music
+                    <tr>
+                        <th colspan="11">
+                            Available Music
+                        </th>
                     </tr>
                     <tr>
                         <th>Track ID</th>
@@ -49,7 +51,7 @@
                         <td><?php echo $track->getMilliseconds(); ?></td>
                         <td><?php echo $track->getBytes(); ?></td>
                         <td><?php echo $track->getUnitPrice(); ?></td>
-                        <td><a href="cart.php?add=<?php echo $track->getID(); ?>">Add to Cart</a></td>
+                        <td><button class="add enabled">Add to Cart</button></td>
                     </tr>
                 <?php endforeach;?>
                 </tbody>
