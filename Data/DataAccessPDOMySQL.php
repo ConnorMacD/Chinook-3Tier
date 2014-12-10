@@ -83,6 +83,53 @@ class DataAccessPDOMySQL extends aDataAccess
         }
     }
 
+    // Account related functions
+
+    public function selectAccountByUserName($username) {
+        try {
+            $this->stmt = $this->dbConnection->prepare('SELECT * FROM accounts WHERE username = :username');
+            $this->stmt->bindParam(':username',$username,PDO::PARAM_STR);
+            $this->stmt->execute();
+        } catch (PDOException $ex) {
+            die('Could not select records from Chinook Database via PDO: ' . $ex->getMessage());
+        }
+    }
+
+    public function fetchAccount()
+    {
+        try
+        {
+            $this->result = $this->stmt->fetch(PDO::FETCH_ASSOC);
+            return $this->result;
+        }
+        catch(PDOException $ex)
+        {
+            die('Could not retrieve from Chinook Database via PDO: ' . $ex->getMessage());
+        }
+    }
+    public function fetchUsername($row) {
+        return $row['username'];
+    }
+
+    public function fetchPassword($row) {
+        return $row['password'];
+    }
+
+    public function insertAccount($username, $password) {
+        try {
+            $this->stmt = $this->dbConnection->prepare('INSERT INTO accounts(username, password) VALUES (:username, :password)');
+            $this->stmt->bindParam(':username',$username,PDO::PARAM_STR);
+            $this->stmt->bindParam(':password',$password,PDO::PARAM_STR);
+            $this->stmt->execute();
+
+            return $this->stmt->rowCount();
+        } catch (PDOException $ex) {
+            die('Could not select records from Chinook Database via PDO: ' . $ex->getMessage());
+        }
+    }
+
+    //End related functions
+
     public function fetchTrackID($row)
     {
         return $row['TrackId'];
@@ -151,5 +198,3 @@ class DataAccessPDOMySQL extends aDataAccess
 //    }
 
 }
-
-?>
