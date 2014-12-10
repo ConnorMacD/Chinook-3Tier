@@ -28,7 +28,7 @@ class Account {
         return $this->m_userName;
     }
 
-    public function getAccount($username) {
+    public static function getAccount($username) {
         $myDataAccess = aDataAccess::getInstance();
         $myDataAccess->connectToDB();
 
@@ -69,10 +69,6 @@ class Account {
         $account = new self($user, $hashedPassword);
 
         return $account;
-    }
-
-    public function verifyPassword($loginPassword, $hashPassword) {
-        return password_verify($loginPassword, $hashPassword);
     }
 
 
