@@ -8,6 +8,8 @@
         <script src="js/myGrid.js"></script>
     </head>
     <body>
+        <h1>Available Tracks:</h1>
+        <h3><a href="ShoppingCart.php">View Cart</a></h3>
         <section>
             <table id="grid">
                 <thead>
@@ -35,13 +37,21 @@
 
                 <?php
 
+                session_start();
+
+                if (isset($_SESSION['cart'])) {
+                    $cart = $_SESSION['cart'];
+                } else {
+                    $cart[] = "";
+                }
+
                 require("../Business/Track.php");
                 $arrayOfTracks = Track::retrieveAll();
 
                 foreach($arrayOfTracks as $track):
                     ?>
                     <tr>
-                        <td><?php echo $track->getID(); ?></td>
+                        <td class="id"><?php echo $track->getID(); ?></td>
                         <td><?php echo $track->getName(); ?></td>
                         <td><?php echo $track->getAlbum(); ?></td>
                         <td><?php echo $track->getArtist(); ?></td>
@@ -51,7 +61,7 @@
                         <td><?php echo $track->getMilliseconds(); ?></td>
                         <td><?php echo $track->getBytes(); ?></td>
                         <td><?php echo $track->getUnitPrice(); ?></td>
-                        <td><button class="add enabled">Add to Cart</button></td>
+                        <td><button class=<?php echo (in_array($track->getID(), $cart) ? "\"add\" disabled>In Cart" : "\"add enabled\">Add to Cart" ) ?></button></td>
                     </tr>
                 <?php endforeach;?>
                 </tbody>
