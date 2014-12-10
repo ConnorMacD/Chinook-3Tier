@@ -29,6 +29,7 @@
 
 <body>
 <h1>Shopping Cart:</h1>
+<h3><a href="searchRecords.php">Back to Store</a> - Debug: <a href="test/resetSession.php">Reset Cart</a></h3>
 <table border="1">
     <thead>
     <tr>
