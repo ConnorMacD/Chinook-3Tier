@@ -83,7 +83,7 @@ class Track implements iBusinessObject {
 
         $myDataAccess->selectTracks($start,$count);
 
-        //fix this
+
         while($row = $myDataAccess->fetchTracks())
         {
             $currentTrack = new self($myDataAccess->fetchTrackName($row), $myDataAccess->fetchTrackMediaType($row),
@@ -107,7 +107,7 @@ class Track implements iBusinessObject {
 
         $myDataAccess->selectAllTracks();
 
-        //fix this
+
         while($row = $myDataAccess->fetchTracks())
         {
             $currentTrack = new self($myDataAccess->fetchTrackName($row), $myDataAccess->fetchTrackMediaType($row),
@@ -123,6 +123,30 @@ class Track implements iBusinessObject {
         $myDataAccess->closeDB();
 
         return $arrayOfTrackObjects;
+    }
+
+    public static function retrieveSpecific($trackId) {
+        $myDataAccess = aDataAccess::getInstance();
+        $myDataAccess->connectToDB();
+
+        $myDataAccess->selectTrackById($trackId);
+
+
+        while($row = $myDataAccess->fetchTracks())
+        {
+            $currentTrack = new self($myDataAccess->fetchTrackName($row), $myDataAccess->fetchTrackMediaType($row),
+                $myDataAccess->fetchTrackComposer($row), $myDataAccess->fetchTrackLength($row),
+                $myDataAccess->fetchTrackSize($row), $myDataAccess->fetchTrackPrice($row),
+                $myDataAccess->fetchTrackAlbum($row), $myDataAccess->fetchTrackArtist($row),
+                $myDataAccess->fetchTrackGenre($row));
+
+            $currentTrack->m_trackId = $myDataAccess->fetchTrackID($row);
+            $trackObject = $currentTrack;
+        }
+
+        $myDataAccess->closeDB();
+
+        return $trackObject;
     }
 
 

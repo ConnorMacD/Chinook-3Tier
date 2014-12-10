@@ -65,6 +65,17 @@ class DataAccessPDOSQLite extends aDataAccess {
         }
     }
 
+    public function selectTrackById($trackId) {
+        try {
+            $this->stmt = $this->dbConnection->prepare('SELECT track.TrackId, track.Name, album.Title AS trackAlbum,artist.Name as trackArtist, mediatype.Name as mediaType,genre.Name as genreName, track.Composer, track.Milliseconds,track.Bytes, track.UnitPrice FROM track
+                JOIN album JOIN mediatype JOIN artist JOIN genre WHERE track.MediaTypeId = mediatype.MediaTypeId AND track.genreId = genre.GenreId AND track.AlbumId = album.AlbumId AND album.ArtistId = artist.ArtistId AND track.TrackId = :trackId ORDER BY track.TrackId');
+            $this->stmt->bindParam(':trackId', $trackId, PDO::PARAM_INT);
+            $this->stmt->execute();
+        } catch (PDOException $ex) {
+            die('Could not select records from Chinook Database via PDO: ' . $ex->getMessage());
+        }
+    }
+
     public function fetchTrackID($row) {
         return $row['TrackId'];
     }
