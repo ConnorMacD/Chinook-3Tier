@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Connor
@@ -7,15 +8,19 @@
  */
     session_start();
     if(!empty($_GET['addId'])) {
-        $id = $_GET['addId'];
-        $_SESSION['cart'][] = $id;
-        die("Added!");
+        if(isset($_SESSION['authenticated'])) {
+            $id = $_GET['addId'];
+            $_SESSION['cart'][] = $id;
+            echo "Added!";
+            die();
+        } else {
+            echo "Please Log In";
+            die();
+        }
+
     }
 
-//    if($_POST['destroy']) {
-//        session_destroy();
-//        header("Location: searchRecords.php");
-//    }
+require("requires/checkLogin.php");
 
 ?>
 

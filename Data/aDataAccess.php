@@ -31,6 +31,16 @@ abstract class aDataAccess
 
     public abstract function selectTrackById($trackId);
 
+    //user account settings
+    public abstract function selectAccountByUserName($username);
+
+    public abstract function fetchAccount();
+
+    public abstract function fetchUsername($row);
+
+    public abstract function fetchPassword($row);
+
+    public abstract function insertAccount($username, $password);
 
     // Fetch individual columns
     public abstract function fetchTrackID($row);
