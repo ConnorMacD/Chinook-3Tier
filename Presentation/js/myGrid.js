@@ -2,13 +2,12 @@ $(document).ready(function(){
     $('#grid').dataTable();
 
     $('#grid tbody').on("click", '.add', function(event) {
-        //event.preventDefault();
         if ($(this).hasClass("enabled")) {
-            $(this).text("Added");
-            //$(this).removeAttr("href");
-            $(this).removeClass("enabled");
+            var id = parseInt($(this).parent().siblings(".id").text());
+            console.log(id);
             $(this).attr("disabled",true);
-            //$(this).off();
+            $(this).load("ShoppingCart.php?addId=" + id);
+            $(this).removeClass("enabled");
             console.log("clicky clicky");
         }
     });
