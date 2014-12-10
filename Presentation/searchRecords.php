@@ -9,7 +9,14 @@
     </head>
     <body>
         <h1>Available Tracks:</h1>
-        <h3><a href="ShoppingCart.php">View Cart</a></h3>
+        <?php session_start(); ?>
+        <h3><a href="ShoppingCart.php">View Cart</a> - <?php
+            if (isset($_SESSION['authenticated'])) {
+                echo ("Welcome, " . $_SESSION['accountName']);
+            } else {
+                echo ("<a href=\"loginAccount.php\">Please log in</a>");
+            }
+            ?></h3>
         <section>
             <table id="grid">
                 <thead>
@@ -36,8 +43,6 @@
                 <tbody>
 
                 <?php
-
-                session_start();
 
                 if (isset($_SESSION['cart'])) {
                     $cart = $_SESSION['cart'];
